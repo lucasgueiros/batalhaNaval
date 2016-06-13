@@ -43,7 +43,7 @@ public class BatalhaNaval {
             }
         }
 
-        String saida = jogo.printJogoJogador(2);
+        String saida = jogo.printJogoJogador(1);
         System.out.println(saida);
         System.out.println(jogo.printJogoJogador(2));
     }
