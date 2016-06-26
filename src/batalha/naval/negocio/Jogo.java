@@ -5,90 +5,82 @@
  */
 package batalha.naval.negocio;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 /**
  *
  * @author 20131D12GR0117
  */
 public class Jogo {
-    
-    // contagem de posicionamento
-    private int countPosicao1 = 0;
-    private int countPosicao2 = 0;
-    
-    private Espaco [][] tabuleiroJogador1 = new Espaco[10][10];
-    private Espaco [][] tabuleiroJogador2 = new Espaco[10][10];
 
-    public Jogo() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                tabuleiroJogador1[i][j] = tabuleiroJogador2[i][j] = Espaco.MAR;
-            }
+    public enum Jogador{
+        PRIMEIRO,SEGUNDO;
+        
+        Jogador getAdversario() {
+            if(this==PRIMEIRO) return SEGUNDO;
+            else  return PRIMEIRO;
         }
+        
     }
     
-    // jogador = 1 => print tabuleiro para Jogador1
-    // jogador = 2 => print tabuleiro para Jogador2
-    public String printJogoJogador(int jogador) {
-        Espaco [][] tabuleiro = null;
-        Espaco [][] outroTabuleiro = null;
-        if(jogador == 1) {               
-            tabuleiro = this.tabuleiroJogador1;
-            outroTabuleiro = this.tabuleiroJogador2;
-        } else {
-            tabuleiro = this.tabuleiroJogador2;
-            outroTabuleiro = this.tabuleiroJogador1;
-        }
-        
-        // daqui pra baixo é igual
-        String saida = "Tabuleiro do Jogador " + jogador + ":\n";
-        
-        saida += "+---+---+---+---+---+---+---+---+---+---+\n";
-        for(int i=0;i<10;i++) {
-            for (int j = 0; j < 10; j++) {
-                switch(tabuleiro[i][j]) {
-                    case MAR:
-                        saida += "| ~ ";
-                        break;
-                    case NAVIO:
-                        saida += "| $ ";
-                        break;
-                }
-            }
-            saida += "|\n+---+---+---+---+---+---+---+---+---+---+\n";
-        }
-        
-        saida += "\n\nTabuleiro do Outro Jogador:\n";
-        
-        saida += "+---+---+---+---+---+---+---+---+---+---+\n";
-        for(int i=0;i<10;i++) {
-            for (int j = 0; j < 10; j++) {
-                switch(tabuleiro[i][j]) {
-                    case MAR:
-                        saida += "| ~ ";
-                        break;
-                    case NAVIO:
-                        saida += "| ~ ";
-                        break;
-                }
-            }
-            saida += "|\n+---+---+---+---+---+---+---+---+---+---+\n";
-        }
-        
-        return saida;
+    private final int tamanho;
+    private Map<Jogador,Tabuleiro> tabuleiros = new EnumMap<>(Jogador.class);
+    private final int navios;
+    
+    public Jogo(int tamanho, int navios) {
+        this.tamanho = tamanho;
+        this.navios = navios;
+        tabuleiros.put(Jogador.PRIMEIRO, new Tabuleiro(tamanho));
+        tabuleiros.put(Jogador.SEGUNDO, new Tabuleiro(tamanho));
+    }
+
+    public void posicionarNavioPrimeiroJogador(int x, int y) {
+        tabuleiros.get(Jogador.PRIMEIRO).posicionarNavio(x, y);
     }
     
-    public void posicionar(int jogador, int x, int y) {
-        Espaco [][] tabuleiro = null;
-        if(jogador==1){
-            tabuleiro = tabuleiroJogador1;
-            if(countPosicao1==3) return;
-            countPosicao1++;
-        } else {
-            tabuleiro = tabuleiroJogador2;
-            if(countPosicao2==3) return;
-            countPosicao2++;
-        }
-        tabuleiro[x][y] = Espaco.NAVIO;
+    public Espaco getEspacoPrimeiroJogador(int x, int y) {
+        return tabuleiros.get(Jogador.PRIMEIRO).getEspaco(x, y);
     }
     
+    public void posicionarNavioSegundoJogador(int x, int y) {
+        tabuleiros.get(Jogador.SEGUNDO).posicionarNavio(x, y);
+    }
+    
+    public Espaco getEspacoSegundoJogador(int x, int y) {
+        return tabuleiros.get(Jogador.SEGUNDO).getEspaco(x, y);
+    }
+    
+    public void posicionarNavio(Jogador j, int x, int y) {
+        tabuleiros.get(j).posicionarNavio(x, y);
+    }
+    
+    public Espaco getEspaco(Jogador j, int x, int y) {
+        return tabuleiros.get(j).getEspaco(x, y);
+    }
+    
+    public Espaco getEspacoAdversario(Jogador jogador, int i, int j) {
+        Espaco e = getEspaco(jogador.getAdversario(), i, j);
+        switch(e) {
+            case MAR_ATINGIDO:
+                return Espaco.MAR_ATINGIDO;
+            case NAVIO_ATINGIDO:
+                return Espaco.NAVIO_ATINGIDO;
+            default:
+                return Espaco.DESCONHECIDO;
+        }
+    }
+
+    public int getTamanho(Jogador j) {
+        return tabuleiros.get(j).getTamanho();
+    }
+
+    public int getTamanho() {
+        return tamanho;
+    }
+    
+    public int getNavios() {
+        return navios;
+    }
+        
 }

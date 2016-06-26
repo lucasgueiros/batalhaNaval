@@ -5,7 +5,11 @@
  */
 package batalha.naval;
 
+import batalha.naval.controller.JogoController;
+import batalha.naval.controller.PosicionarNaviosController;
 import batalha.naval.negocio.Jogo;
+import batalha.naval.view.cli.JogoView;
+import batalha.naval.view.cli.PosicionarNaviosView;
 import java.util.Scanner;
 
 /**
@@ -18,34 +22,27 @@ public class BatalhaNaval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        posicionando();
-    }
-
-    public static void show() {
-        Jogo jogo = new Jogo();
-        String saida = jogo.printJogoJogador(2);
-        System.out.println(saida);
-        System.out.println(jogo.printJogoJogador(2));
-    }
-
-    public static void posicionando() {
-        Jogo jogo = new Jogo();
-        Scanner scan = new Scanner(System.in);
-        for (int j = 1; j <= 2; j++) {
-            System.out.println("Jogador "+j+", vamos posicionar três navios:");
-            for (int i = 1; i <= 3; i++) {
-                int x = 0, y = 0;
-                System.out.print(i + "º Navio: Linha: ");
-                x = scan.nextInt();
-                System.out.print(i + "º Navio: Coluna: ");
-                y = scan.nextInt();
-                jogo.posicionar(j, x, y);
-            }
-        }
-
-        String saida = jogo.printJogoJogador(1);
-        System.out.println(saida);
-        System.out.println(jogo.printJogoJogador(2));
+        
+        Jogo jogo = new Jogo(10, 3);
+        
+        PosicionarNaviosView posicionarNaviosView1 = new PosicionarNaviosView("Primeiro Jogador");
+        PosicionarNaviosView posicionarNaviosView2 = new PosicionarNaviosView("Segundo Jogador");
+        
+        PosicionarNaviosController posicionarNaviosController1 = new PosicionarNaviosController(jogo, posicionarNaviosView1, Jogo.Jogador.PRIMEIRO);
+        PosicionarNaviosController posicionarNaviosController2 = new PosicionarNaviosController(jogo, posicionarNaviosView2, Jogo.Jogador.SEGUNDO);
+        
+        JogoView jogoView1 = new JogoView(10);
+        JogoView jogoView2 = new JogoView(10);
+        
+        JogoController jogoController1 = new JogoController(jogo, jogoView1, Jogo.Jogador.PRIMEIRO);
+        JogoController jogoController2 = new JogoController(jogo, jogoView2, Jogo.Jogador.SEGUNDO);
+        
+        posicionarNaviosController1.posicionarNavios();
+        posicionarNaviosController2.posicionarNavios();
+        
+        jogoController1.updateView();
+        jogoController2.updateView();
+        
     }
 
 }
