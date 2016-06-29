@@ -5,7 +5,7 @@
  */
 package batalha.naval.view.cli;
 
-import batalha.naval.negocio.Espaco;
+import batalha.naval.model.Espaco;
 
 /**
  * Mostra dois tabuleiros: um do próprio jogador e outro do adversário. Não

@@ -7,10 +7,9 @@ package batalha.naval;
 
 import batalha.naval.controller.JogoController;
 import batalha.naval.controller.PosicionarNaviosController;
-import batalha.naval.negocio.Jogo;
+import batalha.naval.model.Jogo;
 import batalha.naval.view.cli.JogoView;
 import batalha.naval.view.cli.PosicionarNaviosView;
-import java.util.Scanner;
 
 /**
  *

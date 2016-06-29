@@ -5,7 +5,7 @@
  */
 package batalha.naval.controller;
 
-import batalha.naval.negocio.Jogo;
+import batalha.naval.model.Jogo;
 import batalha.naval.view.cli.JogoView;
 
 /**
