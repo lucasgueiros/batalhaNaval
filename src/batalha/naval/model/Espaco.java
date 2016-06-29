@@ -17,7 +17,7 @@ public enum Espaco {
             
             switch(this) {
                 case DESCONHECIDO:
-                    return "~";
+                    return "?";
                 case MAR:
                     return "~";
                 case MAR_ATINGIDO:
