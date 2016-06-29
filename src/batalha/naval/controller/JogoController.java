@@ -6,7 +6,10 @@
 package batalha.naval.controller;
 
 import batalha.naval.model.Jogo;
+import batalha.naval.model.exceptions.ForaDoTabuleiroException;
 import batalha.naval.view.cli.JogoView;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -51,8 +54,16 @@ public class JogoController {
     public void updateView() {
         for (int i = 0; i < this.getModel().getTamanho(); i++) {
             for (int j = 0; j < this.getModel().getTamanho(); j++) {
-                view.setEspacoProprio(i, j, model.getEspaco(jogador, i, j)); // TODO
-                view.setEspacoAdversario(i, j, model.getEspacoAdversario(jogador, i, j)); // TODO
+                try {
+                    view.setEspacoProprio(i, j, model.getEspaco(jogador, i, j)); // TODO
+                } catch (ForaDoTabuleiroException ex) {
+                    Logger.getLogger(JogoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    view.setEspacoAdversario(i, j, model.getEspacoAdversario(jogador, i, j)); // TODO
+                } catch (ForaDoTabuleiroException ex) {
+                    Logger.getLogger(JogoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         view.setEstado("Ininiciando"); // TODO

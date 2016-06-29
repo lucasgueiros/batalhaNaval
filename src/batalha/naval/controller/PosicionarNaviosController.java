@@ -6,7 +6,11 @@
 package batalha.naval.controller;
 
 import batalha.naval.model.Jogo;
+import batalha.naval.model.exceptions.ForaDoTabuleiroException;
+import batalha.naval.model.exceptions.MuitosNaviosException;
 import batalha.naval.view.cli.PosicionarNaviosView;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -51,7 +55,13 @@ public class PosicionarNaviosController {
     public void posicionarNavios() {
         view.lerPosicoes();
         for (int i = 0; i < model.getNavios(); i++) {
-            model.posicionarNavio(jogador, view.getLinha(i), view.getColuna(i));
+            try {
+                model.posicionarNavio(jogador, view.getLinha(i), view.getColuna(i));
+            } catch (MuitosNaviosException ex) {
+                Logger.getLogger(PosicionarNaviosController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ForaDoTabuleiroException ex) {
+                Logger.getLogger(PosicionarNaviosController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
