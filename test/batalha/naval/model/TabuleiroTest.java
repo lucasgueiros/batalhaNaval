@@ -50,8 +50,8 @@ public class TabuleiroTest {
     @Test
     public void testPosicionarNavio1() {
         System.out.println("posicionarNavio");
-        int x = 0;
-        int y = 0;
+        int x = 1;
+        int y = 1;
         Tabuleiro instance = new Tabuleiro(10);
         instance.posicionarNavio(x, y);
     }
@@ -75,8 +75,8 @@ public class TabuleiroTest {
     @Test
     public void testPosicionarNavio3() {
         System.out.println("posicionarNavio");
-        int x = 9;
-        int y = 9;
+        int x = 10;
+        int y = 10;
         Tabuleiro instance = new Tabuleiro(10);
         instance.posicionarNavio(x, y);
     }
@@ -99,8 +99,35 @@ public class TabuleiroTest {
     @Test (expected = ForaDoTabuleiroException.class)
     public void testPosicionarNavio5() {
         System.out.println("posicionarNavio");
-        int x = 10;
-        int y = 10;
+        int x = 0;
+        int y = 0;
+        Tabuleiro instance = new Tabuleiro(10);
+        instance.posicionarNavio(x, y);
+    }
+    
+    /**
+     * Teste posicionarNavio MUITOS navios.
+     */
+    @Test
+    public void testPosicionarNavio6() {
+        System.out.println("posicionarNavio");
+        Tabuleiro instance = new Tabuleiro(10);
+        for(int i=1;i<=10;i++){
+            for (int j = 1; j <= 10; j++) {
+                instance.posicionarNavio(i, j);
+            }
+        }
+    }
+    
+    /**
+     * Teste posicionarNavio fora do tabuleiro!
+     * Não sei qual o erro...
+     */
+    @Test (expected = ForaDoTabuleiroException.class)
+    public void testPosicionarNavio7() {
+        System.out.println("posicionarNavio");
+        int x = 20;
+        int y = 3;
         Tabuleiro instance = new Tabuleiro(10);
         instance.posicionarNavio(x, y);
     }
@@ -111,8 +138,8 @@ public class TabuleiroTest {
     @Test
     public void testPosicionarNavioEGetEspaco(){
         System.out.println("testPosicionarNavioEGetEspaco");
-        int x = 0;
-        int y = 0;
+        int x = 1;
+        int y = 1;
         Tabuleiro instance = new Tabuleiro(10);
         instance.posicionarNavio(x, y);
         Espaco result = instance.getEspaco(x, y);
@@ -126,12 +153,14 @@ public class TabuleiroTest {
     @Test
     public void testPosicionarNavioEGetEspaco2(){
         System.out.println("testPosicionarNavioEGetEspaco");
-        int x = 0;
-        int y = 0;
+        int x = 1;
+        int y = 1;
         Tabuleiro instance = new Tabuleiro(10);
         instance.posicionarNavio(x, y);
         Espaco result = instance.getEspaco(x+1, y);
         Espaco expected = Espaco.MAR;
+        System.out.println(expected);
+        System.out.println(result);
         assertEquals(expected, result);
     }
     
@@ -141,8 +170,8 @@ public class TabuleiroTest {
     @Test
     public void testGetEspacoResult() {
         System.out.println("getEspaco");
-        int x = 0;
-        int y = 0;
+        int x = 1;
+        int y = 1;
         Tabuleiro instance = new Tabuleiro(10);
         Espaco expResult = Espaco.MAR;
         Espaco result = instance.getEspaco(x, y);
@@ -155,8 +184,8 @@ public class TabuleiroTest {
     @Test
     public void testGetEspacoErro1() {
         System.out.println("getEspaco");
-        int x = 0;
-        int y = 0;
+        int x = 1;
+        int y = 1;
         Tabuleiro instance = new Tabuleiro(10);
         instance.getEspaco(x, y);
     }
@@ -167,8 +196,8 @@ public class TabuleiroTest {
     @Test
     public void testGetEspacoErro2() {
         System.out.println("getEspaco");
-        int x = 9;
-        int y = 9;
+        int x = 10;
+        int y = 10;
         Tabuleiro instance = new Tabuleiro(10);
         instance.getEspaco(x, y);
     }
@@ -191,8 +220,8 @@ public class TabuleiroTest {
     @Test (expected = ForaDoTabuleiroException.class)
     public void testGetEspacoErro4() {
         System.out.println("getEspaco");
-        int x = 10;
-        int y = 10;
+        int x = 0;
+        int y = 0;
         Tabuleiro instance = new Tabuleiro(10);
         instance.getEspaco(x, y);
     }
@@ -205,6 +234,30 @@ public class TabuleiroTest {
         System.out.println("getEspaco");
         int x = -1;
         int y = -1;
+        Tabuleiro instance = new Tabuleiro(10);
+        instance.getEspaco(x, y);
+    }
+    
+    /**
+     * Test of getEspaco method, of class Tabuleiro.
+     */
+    @Test (expected = ForaDoTabuleiroException.class)
+    public void testGetEspacoErro6() {
+        System.out.println("getEspaco");
+        int x = 20;
+        int y = 20;
+        Tabuleiro instance = new Tabuleiro(10);
+        instance.getEspaco(x, y);
+    }
+    
+    /**
+     * Test of getEspaco method, of class Tabuleiro.
+     */
+    @Test (expected = ForaDoTabuleiroException.class)
+    public void testGetEspacoErro7() {
+        System.out.println("getEspaco");
+        int x = 20;
+        int y = 3;
         Tabuleiro instance = new Tabuleiro(10);
         instance.getEspaco(x, y);
     }
@@ -225,7 +278,7 @@ public class TabuleiroTest {
      * Teste integrado: posicionarNavios e getQuantidade
      */
     @Test
-    public void testPosicionarNaviosEGetQuantidadeDeNavios() {
+    public void testPosicionarNaviosEGetQuantidadeDeNavios1() {
         System.out.println("testPosicionarNaviosEGetQuantidadeDeNavios");
         Tabuleiro instance = new Tabuleiro(10);
         int expResult = 3;
