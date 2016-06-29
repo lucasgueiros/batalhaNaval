@@ -9,7 +9,7 @@ package batalha.naval.model.exceptions;
  *
  * @author lucas
  */
-public class ForaDoTabuleiroException extends ArrayIndexOutOfBoundsException {
+public class ForaDoTabuleiroException extends Exception {
 
     public ForaDoTabuleiroException(String msg) {
         super(msg);
