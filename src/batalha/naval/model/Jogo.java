@@ -5,6 +5,8 @@
  */
 package batalha.naval.model;
 
+import batalha.naval.model.exceptions.ForaDoTabuleiroException;
+import batalha.naval.model.exceptions.MuitosNaviosException;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -31,35 +33,20 @@ public class Jogo {
     public Jogo(int tamanho, int navios) {
         this.tamanho = tamanho;
         this.navios = navios;
-        tabuleiros.put(Jogador.PRIMEIRO, new Tabuleiro(tamanho));
-        tabuleiros.put(Jogador.SEGUNDO, new Tabuleiro(tamanho));
+        tabuleiros.put(Jogador.PRIMEIRO, new Tabuleiro(tamanho,navios));
+        tabuleiros.put(Jogador.SEGUNDO, new Tabuleiro(tamanho,navios));
     }
 
-    private void posicionarNavioPrimeiroJogador(int x, int y) {
-        tabuleiros.get(Jogador.PRIMEIRO).posicionarNavio(x, y);
-    }
     
-    private Espaco getEspacoPrimeiroJogador(int x, int y) {
-        return tabuleiros.get(Jogador.PRIMEIRO).getEspaco(x, y);
-    }
-    
-    private void posicionarNavioSegundoJogador(int x, int y) {
-        tabuleiros.get(Jogador.SEGUNDO).posicionarNavio(x, y);
-    }
-    
-    private Espaco getEspacoSegundoJogador(int x, int y) {
-        return tabuleiros.get(Jogador.SEGUNDO).getEspaco(x, y);
-    }
-    
-    public void posicionarNavio(Jogador j, int x, int y) {
+    public void posicionarNavio(Jogador j, int x, int y) throws MuitosNaviosException, ForaDoTabuleiroException {
         tabuleiros.get(j).posicionarNavio(x, y);
     }
     
-    public Espaco getEspaco(Jogador j, int x, int y) {
+    public Espaco getEspaco(Jogador j, int x, int y) throws ForaDoTabuleiroException {
         return tabuleiros.get(j).getEspaco(x, y);
     }
     
-    public Espaco getEspacoAdversario(Jogador jogador, int i, int j) {
+    public Espaco getEspacoAdversario(Jogador jogador, int i, int j) throws ForaDoTabuleiroException {
         Espaco e = getEspaco(jogador.getAdversario(), i, j);
         switch(e) {
             case MAR_ATINGIDO:
@@ -69,10 +56,6 @@ public class Jogo {
             default:
                 return Espaco.DESCONHECIDO;
         }
-    }
-
-    private int getTamanho(Jogador j) {
-        return tabuleiros.get(j).getTamanho();
     }
 
     public int getTamanho() {
