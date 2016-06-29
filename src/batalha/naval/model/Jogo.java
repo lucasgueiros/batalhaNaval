@@ -35,19 +35,19 @@ public class Jogo {
         tabuleiros.put(Jogador.SEGUNDO, new Tabuleiro(tamanho));
     }
 
-    public void posicionarNavioPrimeiroJogador(int x, int y) {
+    private void posicionarNavioPrimeiroJogador(int x, int y) {
         tabuleiros.get(Jogador.PRIMEIRO).posicionarNavio(x, y);
     }
     
-    public Espaco getEspacoPrimeiroJogador(int x, int y) {
+    private Espaco getEspacoPrimeiroJogador(int x, int y) {
         return tabuleiros.get(Jogador.PRIMEIRO).getEspaco(x, y);
     }
     
-    public void posicionarNavioSegundoJogador(int x, int y) {
+    private void posicionarNavioSegundoJogador(int x, int y) {
         tabuleiros.get(Jogador.SEGUNDO).posicionarNavio(x, y);
     }
     
-    public Espaco getEspacoSegundoJogador(int x, int y) {
+    private Espaco getEspacoSegundoJogador(int x, int y) {
         return tabuleiros.get(Jogador.SEGUNDO).getEspaco(x, y);
     }
     
