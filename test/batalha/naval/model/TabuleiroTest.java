@@ -7,6 +7,7 @@ package batalha.naval.model;
 
 import batalha.naval.model.exceptions.ForaDoTabuleiroException;
 import batalha.naval.model.exceptions.MuitosNaviosException;
+import batalha.naval.model.exceptions.PosicaoInvalidaException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -25,25 +26,6 @@ public class TabuleiroTest {
     
     private Tabuleiro t = new Tabuleiro(10,3);
     
-    public TabuleiroTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of posicionarNavio method, of class Tabuleiro.
      * Dentro do tabuleiro
@@ -132,6 +114,34 @@ public class TabuleiroTest {
         Tabuleiro instance = new Tabuleiro(10,3);
         instance.posicionarNavio(x, y);
     }
+    
+    /**
+     * Teste posicionarNavios
+     */
+    @Test (expected = MuitosNaviosException.class)
+    public void testPosicionarNavio8() throws MuitosNaviosException, ForaDoTabuleiroException {
+        System.out.println("testPosicionarNaviosEGetQuantidadeDeNavios");
+        Tabuleiro instance = new Tabuleiro(10,2);
+        int expResult = 3;
+        instance.posicionarNavio(1, 1);
+        instance.posicionarNavio(2, 2);
+        instance.posicionarNavio(3, 3);
+        instance.posicionarNavio(4, 4);
+        int result = instance.getQuantidadeDeNavios();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste posicionarNavios
+     */
+    @Test (expected = PosicaoInvalidaException.class)
+    public void testPosicionarNavio9() throws MuitosNaviosException, ForaDoTabuleiroException {
+        System.out.println("testPosicionarNaviosEGetQuantidadeDeNavios");
+        Tabuleiro instance = new Tabuleiro(10,3);
+        instance.posicionarNavio(1, 1);
+        instance.posicionarNavio(1, 1);
+    }
+    
     
     /**
      * Teste integrado: posicionarNavio + getEspaco
@@ -286,22 +296,6 @@ public class TabuleiroTest {
         instance.posicionarNavio(1, 1);
         instance.posicionarNavio(2, 2);
         instance.posicionarNavio(3, 3);
-        int result = instance.getQuantidadeDeNavios();
-        assertEquals(expResult, result);
-    }
-    
-    /**
-     * Teste posicionarNavios
-     */
-    @Test (expected = MuitosNaviosException.class)
-    public void testPosicionarNavios2() throws MuitosNaviosException, ForaDoTabuleiroException {
-        System.out.println("testPosicionarNaviosEGetQuantidadeDeNavios");
-        Tabuleiro instance = new Tabuleiro(10,3);
-        int expResult = 3;
-        instance.posicionarNavio(1, 1);
-        instance.posicionarNavio(2, 2);
-        instance.posicionarNavio(3, 3);
-        instance.posicionarNavio(4, 4);
         int result = instance.getQuantidadeDeNavios();
         assertEquals(expResult, result);
     }
