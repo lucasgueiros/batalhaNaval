@@ -58,7 +58,7 @@ public class JogoTest {
         int x = 1;
         int y = 1;
         Jogo instance = new Jogo(10, 3);
-        Espaco expResult = Espaco.MAR;
+        Espaco expResult = Espaco.DESCONHECIDO;
         Espaco result = instance.getEspacoAdversario(j, x, y);
         assertEquals(expResult, result);
     }
