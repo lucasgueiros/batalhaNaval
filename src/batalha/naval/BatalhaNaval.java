@@ -24,14 +24,14 @@ public class BatalhaNaval {
         
         Jogo jogo = new Jogo(10, 3);
         
-        PosicionarNaviosView posicionarNaviosView1 = new PosicionarNaviosView("Primeiro Jogador");
-        PosicionarNaviosView posicionarNaviosView2 = new PosicionarNaviosView("Segundo Jogador");
+        PosicionarNaviosView posicionarNaviosView1 = new PosicionarNaviosView(System.in, System.out, "Primeiro Jogador");
+        PosicionarNaviosView posicionarNaviosView2 = new PosicionarNaviosView(System.in, System.out, "Segundo Jogador");
         
         PosicionarNaviosController posicionarNaviosController1 = new PosicionarNaviosController(jogo, posicionarNaviosView1, Jogo.Jogador.PRIMEIRO);
         PosicionarNaviosController posicionarNaviosController2 = new PosicionarNaviosController(jogo, posicionarNaviosView2, Jogo.Jogador.SEGUNDO);
         
-        JogoView jogoView1 = new JogoView(10);
-        JogoView jogoView2 = new JogoView(10);
+        JogoView jogoView1 = new JogoView(System.in, System.out, 10);
+        JogoView jogoView2 = new JogoView(System.in, System.out, 10);
         
         JogoController jogoController1 = new JogoController(jogo, jogoView1, Jogo.Jogador.PRIMEIRO);
         JogoController jogoController2 = new JogoController(jogo, jogoView2, Jogo.Jogador.SEGUNDO);

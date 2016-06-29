@@ -6,6 +6,9 @@
 package batalha.naval.view.cli;
 
 import batalha.naval.model.Espaco;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 /**
  * Mostra dois tabuleiros: um do próprio jogador e outro do adversário. Não
@@ -16,10 +19,15 @@ import batalha.naval.model.Espaco;
  */
 public class JogoView {
 
-    public JogoView(int tam) {
+    private final InputStream input;
+    private final PrintStream output;
+
+    public JogoView(InputStream in, PrintStream out, int tam) {
         this.tam = tam;
         proprio = new Espaco[tam][tam];
         adversario = new Espaco[tam][tam];
+        this.input = in;
+        this.output = out;
     }
 
     private final int tam;
@@ -52,13 +60,13 @@ public class JogoView {
     }
 
     public void mostrarTabuleiroProprio() {
-        System.out.println("Seu tabuleiro:\n");
-        System.out.println(tabuleiroToString(proprio));
+        output.println("Seu tabuleiro:\n");
+        output.println(tabuleiroToString(proprio));
     }
 
     public void mostrarTabuleiroAdversario() {
-        System.out.println("Tabuleiro adversário:\n");
-        System.out.println(tabuleiroToString(adversario));
+        output.println("Tabuleiro adversário:\n");
+        output.println(tabuleiroToString(adversario));
     }
 
     private String tabuleiroToString(Espaco[][] tabuleiro) {
@@ -73,7 +81,7 @@ public class JogoView {
     }
 
     public void mostrarEstado() {
-        System.out.println("Situação atual do jogo: " + estado);
+        output.println("Situação atual do jogo: " + estado);
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package batalha.naval.view.cli;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,11 +21,16 @@ public class PosicionarNaviosView {
     // [x][0] -> linha
     // [x][1] -> coluna
     private int[][] posicoes = new int[3][2];
-    private Scanner scan = new Scanner(System.in);
+    private Scanner scan;
     private String jogador;
+    private final InputStream input;
+    private final PrintStream output;
 
-    public PosicionarNaviosView(String jogador) {
+    public PosicionarNaviosView(InputStream input, PrintStream output, String jogador) {
+        this.scan = new Scanner(input);
         this.jogador = jogador;
+        this.input = input;
+        this.output = output;
     }
 
     public int getLinha(int navio) {
@@ -35,14 +42,14 @@ public class PosicionarNaviosView {
     }
 
     private void lerPosicao(int navio) {
-        System.out.print((navio+1) + "º Navio: Linha: ");
+        output.print((navio+1) + "º Navio: Linha: ");
         posicoes[navio][0] = scan.nextInt();
-        System.out.print((navio+1) + "º Navio: Coluna: ");
+        output.print((navio+1) + "º Navio: Coluna: ");
         posicoes[navio][1] = scan.nextInt();
     }
 
     public void lerPosicoes() {
-        System.out.println(jogador + ", vamos posicionar três navios:");
+        output.println(jogador + ", vamos posicionar três navios:");
         for (int i = 0; i < 3; i++) {
             lerPosicao(i);
         }
