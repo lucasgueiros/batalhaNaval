@@ -5,7 +5,6 @@
  */
 package batalha.naval.model;
 
-import batalha.naval.negocio.Jogo;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
