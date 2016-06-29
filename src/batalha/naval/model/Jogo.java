@@ -71,7 +71,7 @@ public class Jogo {
         }
     }
 
-    public int getTamanho(Jogador j) {
+    private int getTamanho(Jogador j) {
         return tabuleiros.get(j).getTamanho();
     }
 
