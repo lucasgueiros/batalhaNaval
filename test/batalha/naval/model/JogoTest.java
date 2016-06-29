@@ -5,6 +5,8 @@
  */
 package batalha.naval.model;
 
+import batalha.naval.model.exceptions.ForaDoTabuleiroException;
+import batalha.naval.model.exceptions.MuitosNaviosException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,69 +20,47 @@ import static org.junit.Assert.*;
  */
 public class JogoTest {
     
-    public JogoTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of posicionarNavio method, of class Jogo.
      */
     @Test
-    public void testPosicionarNavio() {
+    public void testPosicionarNavio() throws MuitosNaviosException, ForaDoTabuleiroException {
         System.out.println("posicionarNavio");
-        Jogo.Jogador j = null;
-        int x = 0;
-        int y = 0;
-        Jogo instance = null;
+        Jogo.Jogador j = Jogo.Jogador.PRIMEIRO;
+        int x = 1;
+        int y = 1;
+        Jogo instance = new Jogo(10, 3);
         instance.posicionarNavio(j, x, y);
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of getEspaco method, of class Jogo.
      */
     @Test
-    public void testGetEspaco() {
+    public void testGetEspaco() throws ForaDoTabuleiroException {
         System.out.println("getEspaco");
-        Jogo.Jogador j = null;
-        int x = 0;
-        int y = 0;
-        Jogo instance = null;
-        Espaco expResult = null;
+        Jogo.Jogador j = Jogo.Jogador.PRIMEIRO;
+        int x = 1;
+        int y = 1;
+        Jogo instance = new Jogo(10, 3);
+        Espaco expResult = Espaco.MAR;
         Espaco result = instance.getEspaco(j, x, y);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of getEspacoAdversario method, of class Jogo.
      */
     @Test
-    public void testGetEspacoAdversario() {
+    public void testGetEspacoAdversario() throws ForaDoTabuleiroException {
         System.out.println("getEspacoAdversario");
-        Jogo.Jogador jogador = null;
-        int i = 0;
-        int j = 0;
-        Jogo instance = null;
-        Espaco expResult = null;
-        Espaco result = instance.getEspacoAdversario(jogador, i, j);
+        Jogo.Jogador j = Jogo.Jogador.PRIMEIRO;
+        int x = 1;
+        int y = 1;
+        Jogo instance = new Jogo(10, 3);
+        Espaco expResult = Espaco.MAR;
+        Espaco result = instance.getEspacoAdversario(j, x, y);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     /**
