@@ -11,7 +11,7 @@ package batalha.naval.model;
  */
 public class Tabuleiro {
 
-    private int navios = 0;
+    private int quantidadeDeNavios = 0;
     private int tamanho;
     private Espaco[][] tabuleiro;
 
@@ -27,10 +27,10 @@ public class Tabuleiro {
 
     public void posicionarNavio(int x, int y) {
 
-        if (navios == 3) {
+        if (quantidadeDeNavios == 3) {
             return;
         }
-        navios++;
+        quantidadeDeNavios++;
 
         tabuleiro[x][y] = Espaco.NAVIO;
     }
@@ -39,8 +39,8 @@ public class Tabuleiro {
         return tabuleiro[x][y];
     }
 
-    public int getNavios() {
-        return navios;
+    public int getQuantidadeDeNavios() {
+        return quantidadeDeNavios;
     }
 
     public int getTamanho() {
